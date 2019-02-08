@@ -1,0 +1,25 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::content})}" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:fragment="title">SQL Injection (Advanced)</title>
+	</head>
+	<body>
+		<div th:fragment="content">
+			<h1>SQL Injection (Advanced)</h1>
+			<p>L'objectif est d'utiliser une injection SQL pour retourner la liste des utilisateurs en base, ainsi que leurs mots de passe.</p>
+			<p>L'injection devra se faire directement dans l'URL, essayer de consulter un des articles suivants :</p>
+
+			<ul>
+				<li th:each="article: ${articles}">
+					<a th:text="${article.title}" th:href="@{/injection/article(id=${article.id})}" href="#">Article 1</a>
+				</li>
+			</ul>
+			
+			<p>En indice, voici une méthode pour identifier les parties remplaçable du template</p>
+			<code th:text="|${#httpServletRequest.scheme}://${#httpServletRequest.serverName}:${#httpServletRequest.serverPort}@{/injection/article(id='null union SELECT 1,2,3')}|"></code>
+			<p></p>
+			
+			<p>Et voici comment récupérer la liste des tables de la base de données</p>
+			<code th:text="|${#httpServletRequest.scheme}://${#httpServletRequest.serverName}:${#httpServletRequest.serverPort}@{/injection/article(id='null union SELECT 1,2,group_concat(TABLE_NAME) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=\'PUBLIC\'')}|"></code>
+		</div>
+	</body>
+</html>

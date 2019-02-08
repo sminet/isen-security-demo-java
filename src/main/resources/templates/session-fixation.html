@@ -1,0 +1,37 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::content})}" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:fragment="title">Homepage</title>
+	</head>
+	<body>
+		<div th:fragment="content">
+			<h1>Session fixation</h1>
+			<p>L'objectif de cet exercice est de démontrer le principe de fixation de session.</p>
+			<p>Pour cela, il faut 2 navigateurs différents.</p>
+			<p>Le premier représentera l'attaquant, le deuxième, la victime de l'attaque.</p>
+	
+			<p>
+				Le principe est de générer une session invité sur ce site (ce qui est déjà fait si vous regardez cette page), puis d'envoyer un
+				lien à la victime qui va cliquer dessus. Ce lien embarquera l'id dela session de l'attaquant.
+			</p>
+			<p>La méthode permettant d'inciter une victime à cliquer sur un lien "piégé" ne sera pas abordée (mail, twitter, ...)</p>
+			<p>
+				La victime va alors s'authentifier avec votre session... en rafraichissant la page, l'attaquant sera loggé avec le
+				compte de la victime.
+			</p>
+	
+			<ul>
+				<li>Ouvrer ce lien dans votre second navigateur (victime) :
+					<span th:text="|${#httpServletRequest.scheme}://${#httpServletRequest.serverName}:${#httpServletRequest.serverPort}@{/session/fixation/login}|">http://link/</span>
+				</li>
+				<li>Sur le second navigateur, authentifiez vous avec un des comptes suivants :
+					<ul>
+						<li th:each="user: ${users}" th:text="|${user.username} : ${user.password}|"></li>
+					</ul>
+				</li>
+				<li>Vous pouvez ensuite accéder à son profil :
+					<a th:href="@{/session/fixation/login}" href="#">Profil</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

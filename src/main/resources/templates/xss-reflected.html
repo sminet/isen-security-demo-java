@@ -1,0 +1,41 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::content})}" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:fragment="title">Homepage</title>
+	</head>
+	<body>
+		<div th:fragment="content">
+			<h1>XSS</h1>
+			<p>L'objectif est de <strong>générer un lien</strong> pointant sur cette page, contenant injection XSS capable de "défigurer" la page.</p>
+			<p>Ce code doit, par exemple, ajouter une image en haut de page (utilisez JQuery)</p>
+			
+			<form>
+				<div class="form-row align-items-center">
+					<div class="col-sm-3 my-1">
+						<input class="form-control" type="text" placeholder="Search articles containing..." name="q">
+					</div>
+					<div class="col-auto my-1">
+						<button type="submit" class="btn btn-primary">Search</button>
+					</div>
+				</div>
+			</form>
+			
+			<div th:if="${q != null}">
+				<h2>You searched <b th:utext="${q}"></b></h2>
+				
+				<div th:if="${#lists.isEmpty(matches)}">
+					<h3>Not match found</h3>
+				</div>
+				
+				<div th:if="${not #lists.isEmpty(matches)}">
+					<h3 th:text="|${#lists.size(matches)} matches found|">3 matches found</h3>
+					<table>
+						<tr th:each="match: ${matches}">
+							<td th:text="${match.title}"></td>
+							<td th:text="${match.content}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

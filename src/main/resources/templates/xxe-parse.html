@@ -1,0 +1,27 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::content})}" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:fragment="title">Homepage</title>
+	</head>
+	<body>
+		<div th:fragment="content">
+			<h1>Imported products</h1>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Description</th>
+						<th scope="col">Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product: ${products}">
+						<td th:text="${product.name}"></td>
+						<td style="white-space:pre; font-family: monospace;" th:text="${product.description}"></td>
+						<td th:text="${#numbers.formatInteger(product.price / 100, 2, 'POINT')}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

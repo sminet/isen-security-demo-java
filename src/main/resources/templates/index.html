@@ -1,0 +1,24 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::content})}" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:fragment="title">Homepage</title>
+	</head>
+	<body>
+		<div th:fragment="content">
+			<h1>Introduction</h1>
+			<p>Ceci est une application permettant d'étudier les failles de sécurité les plus communes.</p>
+			
+			<ul>
+				<li>Injection SQL</li>
+				<li>XSS</li>
+				<li>Session fixation</li>
+				<li>XXE</li>
+			</ul>
+			
+			<p>Il s'agit d'un site de démonstration <strong>possédant des failles de sécurité</strong>, assurez vous de :</p>
+			<ul>
+				<li>ne pas configurer le compte de base de donnée avec un accès administrateur</li>
+				<li>lancer le site avec uniquement localhost en écoute</li>
+			</ul>
+		</div>
+	</body>
+</html>

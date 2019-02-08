@@ -1,0 +1,34 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::content})}" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:fragment="title">Homepage</title>
+	</head>
+	<body>
+		<div th:fragment="content">
+			<h1>XSS</h1>
+			<p>L'objectif est de créer un article contenant injection XSS capable de "défigurer" la page.</p>
+			<p>Ceci impactera toutes les personnes consultant cette page.</p>
+			<p>Ce code doit, par exemple, ajouter une image en haut de page (utilisez JQuery)</p>
+			
+			<h3>Add a publication</h3>
+			<form method="post">
+				<div class="form-group">
+					<label for="title">Title</label>
+					<input type="text" class="form-control" id="title" name="title" placeholder="Enter publication title">
+				</div>
+				<div class="form-group">
+					<label for="content">Content</label>
+					<textarea class="form-control" id="content" name="content" rows="8"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+			
+			<h2>Publication list :</h2>
+			<table class="table table-striped">
+				<tr th:each="article: ${articles}">
+					<td th:utext="${article.title}"></td>
+					<td th:utext="${article.content}"></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

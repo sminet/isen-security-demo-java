@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (title, content)">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<title th:replace="${title}">Application Title</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a th:href="@{/}" class="navbar-brand" href="#">Security</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Exercices </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a th:href="@{/injection/login}" class="dropdown-item" href="#">Injection SQL (login)</a>
+							<a th:href="@{/injection/advanced}" class="dropdown-item" href="#">Injection SQL (avancée)</a>
+							<a th:href="@{/xss/reflected}" class="dropdown-item" href="#">XSS (Reflected)</a>
+							<a th:href="@{/xss/stored}" class="dropdown-item" href="#">XSS (Stored)</a>
+							<a th:href="@{/session/fixation}" class="dropdown-item" href="#">Session fixation</a>
+							<a th:href="@{/xxe}" class="dropdown-item" href="#">XXE</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div th:replace="${content}">
+				<p>Layout page, content gets here !</p>
+			</div>
+		</div>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	</body>
+</html>
