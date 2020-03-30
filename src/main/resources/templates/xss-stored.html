@@ -5,9 +5,12 @@
 	<body>
 		<div th:fragment="content">
 			<h1>XSS</h1>
-			<p>L'objectif est de créer un article contenant injection XSS capable de "défigurer" la page.</p>
-			<p>Ceci impactera toutes les personnes consultant cette page.</p>
-			<p>Ce code doit, par exemple, ajouter une image en haut de page (utilisez JQuery)</p>
+			
+			<div class="alert alert-secondary" role="alert">
+				<p>L'objectif est de créer un article contenant injection XSS capable de "défigurer" la page.</p>
+				<p>Ceci impactera toutes les personnes consultant cette page.</p>
+				<p>Ce code doit, par exemple, ajouter une image en haut de page (utilisez JQuery)</p>
+			</div>
 			
 			<h3>Add a publication</h3>
 			<form method="post">

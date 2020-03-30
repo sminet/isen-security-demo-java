@@ -5,9 +5,13 @@
 	<body>
 		<div th:fragment="content">
 			<h1>XSS</h1>
-			<p>L'objectif est de <strong>générer un lien</strong> pointant sur cette page, contenant injection XSS capable de "défigurer" la page.</p>
-			<p>Ce code doit, par exemple, ajouter une image en haut de page (utilisez JQuery)</p>
 			
+			<div class="alert alert-secondary" role="alert">
+				<p>L'objectif est de <strong>générer un lien</strong> pointant sur cette page, contenant injection XSS capable de "défigurer" la page.</p>
+				<p>Ce code doit, par exemple, ajouter une image en haut de page (utilisez JQuery)</p>
+			</div>
+			
+			<h3>Search a publication :</h3>
 			<form>
 				<div class="form-row align-items-center">
 					<div class="col-sm-3 my-1">
