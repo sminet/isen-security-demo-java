@@ -3,16 +3,15 @@ package fr.yncrea.cir3.securitydemo.controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.yncrea.cir3.securitydemo.dto.CardValidation;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import fr.yncrea.cir3.securitydemo.domain.Article;
 import fr.yncrea.cir3.securitydemo.domain.User;
@@ -83,5 +82,18 @@ public class InjectionController {
 		
 		model.addAttribute("article", a);
 		return "injection-advanced-article";
+	}
+
+	@GetMapping("/blind")
+	public String blindWelcome() {
+		return "injection-blind";
+	}
+
+	@PostMapping("/blind/ajax")
+	public ResponseEntity<Message> blindWelcome(@RequestBody CardValidation card) {
+		String sql = "SELECT count(1) FROM cards WHERE username = '" + card.getUsername() + "' AND number = '" + card.getNumber() + "'";
+		Long count = db.queryForObject(sql, Long.class);
+
+		return ResponseEntity.ok(new Message(count <= 0 ? "KO" : "OK", "info"));
 	}
 }

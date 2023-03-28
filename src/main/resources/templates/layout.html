@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 		<title th:replace="${title}">Application Title</title>
 	</head>
 	<body>
@@ -25,6 +25,7 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a th:href="@{/injection/login}" class="dropdown-item" href="#">Injection SQL (login)</a>
 							<a th:href="@{/injection/advanced}" class="dropdown-item" href="#">Injection SQL (avancée)</a>
+							<a th:href="@{/injection/blind}" class="dropdown-item" href="#">Injection SQL (blind)</a>
 							<a th:href="@{/xss/reflected}" class="dropdown-item" href="#">XSS (Reflected)</a>
 							<a th:href="@{/xss/stored}" class="dropdown-item" href="#">XSS (Stored)</a>
 							<a th:href="@{/session/fixation}" class="dropdown-item" href="#">Session fixation</a>

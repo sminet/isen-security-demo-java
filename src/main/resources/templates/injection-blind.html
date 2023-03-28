@@ -1,0 +1,53 @@
+<html th:replace="~{layout :: layout(~{::title}, ~{::content})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:fragment="title">SQL Injection (Blind)</title>
+</head>
+<body>
+<div th:fragment="content">
+    <h1>SQL Injection (Blind)</h1>
+    <div class="alert alert-secondary" role="alert">
+        <p>L'objectif est d'utiliser une injection SQL à l'aveugle (blind) pour deviner le code pin d'une carte de paiement.</p>
+        <p>Ci dessous, le formulaire vérifie si le numéro de la carte existe en base de données. Déterminer le code pin de l'utilisateur <b>admin</b> en profitant de l'injection SQL</p>
+        <p>Pour faciliter l'exercice, le formulaire ci-dessous est déjà rempli</p>
+    </div>
+
+    <h3>Entrer votre numéro de carte :</h3>
+    <form method="post">
+        <div class="form-row align-items-center">
+            <div class="col-sm-3 my-1">
+                <input type="text" class="form-control" placeholder="Username" name="username" value="denis.fresnel">
+            </div>
+            <div class="col-sm-3 my-1">
+                <input type="text" class="form-control" placeholder="Numéro de la carte" name="number" value="1234567890">
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function checkCardNumber() {
+            $.ajax({
+                url: '[[ @{/injection/blind/ajax} ]]',
+                type: 'post',
+                dataType : 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({
+                    username: $('input[name=username]').val(),
+                    number: $('input[name=number]').val(),
+                }),
+            }).done( response => {
+                if (response.text === 'OK') {
+                    $('input[name=number]').removeClass('is-invalid').addClass('is-valid');
+                } else {
+                    $('input[name=number]').removeClass('is-valid').addClass('is-invalid');
+                }
+            });
+        }
+
+        $(function() {
+            $('input[name=number]').keyup(checkCardNumber);
+            checkCardNumber();
+        });
+    </script>
+</div>
+</body>
+</html>
